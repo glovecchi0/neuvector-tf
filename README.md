@@ -1,6 +1,6 @@
 # Security from scratch
 
-Create a K8s cluster managed by NeuVector from day one.
+Create a K8s cluster protected by NeuVector from day one.
 
 ## Google Kubernetes Engine | Procedure
 
