@@ -1,0 +1,13 @@
+prefix =
+project_id =
+region =
+# ip_cidr_range =
+# vpc =
+# subnet =
+# cluster_version =
+# instance_count =
+# instance_disk_size =
+# disk_type =
+# image_type =
+# instance_type =
+neuvector_password =

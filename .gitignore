@@ -1,0 +1,18 @@
+# Terraform directories and files
+**/.terraform/*
+**/terraform-provider*/*
+*.tfstate
+*.tfstate.*
+*.terraform*
+crash.log
+
+# Files that may contain secrets
+terraform.tfvars
+*kube_config.yml*
+
+# Temporary files
+**/*.swp
+.DS_Store
+
+# Allow
+!tf-modules/google-cloud/gke/template-kube_config.yml
