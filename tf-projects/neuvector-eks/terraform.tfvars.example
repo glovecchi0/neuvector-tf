@@ -4,7 +4,6 @@ prefix =
 # vpc =
 # subnet =
 # instance_count =
-## Option 1 - AWS CLI
 # aws_access_key    =
 # aws_secret_key    =
 # aws_session_token =

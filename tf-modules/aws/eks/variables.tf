@@ -29,13 +29,11 @@ variable "instance_count" {
   description = "The number of instances per Node Group"
 }
 
-## Option 1 - AWS CLI
 # variable "aws_access_key" {}
-# variable "aws_secret_key" {}
-# variable "aws_session_token" {}
 
-## Option 3 - IAM Identity Center credentials
-# variable "aws_profile" {}
+# variable "aws_secret_key" {}
+
+# variable "aws_session_token" {}
 
 variable "aws_region" {
   description = "AWS Region to create the resources"

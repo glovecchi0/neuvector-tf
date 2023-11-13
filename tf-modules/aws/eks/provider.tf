@@ -42,8 +42,6 @@ provider "aws" {
   ## Option 2 - Manually creating credential files
   #  shared_config_files      = ["~/.aws/config"]
   #  shared_credentials_files = ["~/.aws/credentials"]
-  ## Option 3 - IAM Identity Center credentials
-  #  profile = var.aws_profile
   region = var.aws_region
 }
 
