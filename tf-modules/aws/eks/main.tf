@@ -107,7 +107,7 @@ resource "aws_eks_node_group" "primary-nodes" {
   cluster_name    = aws_eks_cluster.primary.name
   node_group_name = "primary-node-pool"
   node_role_arn   = aws_iam_role.node-iam-role.arn
-  subnet_ids      = var.subnet == null ? [aws_subnet.subnet[0].id] : [var.subnet]
+  subnet_ids      = var.subnet == null ? [aws_subnet.subnet[0].id, aws_subnet.subnet[1].id] : [var.subnet]
 
   scaling_config {
     desired_size = var.instance_count
