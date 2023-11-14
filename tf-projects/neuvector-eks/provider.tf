@@ -42,7 +42,7 @@ provider "aws" {
   ## Option 2 - Manually creating credential files
   #  shared_config_files      = ["~/.aws/config"]
   #  shared_credentials_files = ["~/.aws/credentials"]
-  region  = var.aws_region
+  region = var.aws_region
 }
 
 provider "kubernetes" {

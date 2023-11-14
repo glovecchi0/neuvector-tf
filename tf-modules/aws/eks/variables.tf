@@ -9,9 +9,9 @@ variable "vpc_ip_cidr_range" {
 }
 
 variable "subnet_ip_cidr_range" {
-  type        = string
-  default     = "10.0.1.0/24"
-  description = "Range of private IPs available for the AWS Subnet"
+  type        = list(any)
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+  description = "List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane."
 }
 
 variable "vpc" {
@@ -20,7 +20,7 @@ variable "vpc" {
 }
 
 variable "subnet" {
-  description = "AWS Subnet ID used for all resources"
+  description = "AWS Subnet IDs used for all resources. Must be in at least two different availability zones."
   default     = null
 }
 

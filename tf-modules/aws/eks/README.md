@@ -37,6 +37,7 @@ No modules.
 | [aws_subnet.subnet](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
 | [aws_vpc.vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | resource |
 | [local_file.kube-config-export](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
+| [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 
 ## Inputs
 
@@ -45,8 +46,8 @@ No modules.
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region to create the resources | `any` | n/a | yes |
 | <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | The number of instances per Node Group | `number` | `1` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | The prefix used in front of all AWS resources | `any` | n/a | yes |
-| <a name="input_subnet"></a> [subnet](#input\_subnet) | AWS Subnet ID used for all resources | `any` | `null` | no |
-| <a name="input_subnet_ip_cidr_range"></a> [subnet\_ip\_cidr\_range](#input\_subnet\_ip\_cidr\_range) | Range of private IPs available for the AWS Subnet | `string` | `"10.0.1.0/24"` | no |
+| <a name="input_subnet"></a> [subnet](#input\_subnet) | AWS Subnet IDs used for all resources. Must be in at least two different availability zones. | `any` | `null` | no |
+| <a name="input_subnet_ip_cidr_range"></a> [subnet\_ip\_cidr\_range](#input\_subnet\_ip\_cidr\_range) | List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane. | `list(any)` | <pre>[<br>  "10.0.1.0/24",<br>  "10.0.2.0/24"<br>]</pre> | no |
 | <a name="input_vpc"></a> [vpc](#input\_vpc) | AWS VPC ID used for all resources | `any` | `null` | no |
 | <a name="input_vpc_ip_cidr_range"></a> [vpc\_ip\_cidr\_range](#input\_vpc\_ip\_cidr\_range) | Range of private IPs available for the AWS VPC | `string` | `"10.0.0.0/16"` | no |
 

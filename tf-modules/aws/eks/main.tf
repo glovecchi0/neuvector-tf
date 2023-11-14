@@ -1,12 +1,17 @@
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_vpc" "vpc" {
   count      = var.vpc == null ? 1 : 0
   cidr_block = var.vpc_ip_cidr_range
 }
 
 resource "aws_subnet" "subnet" {
-  count      = var.subnet == null ? 1 : 0
-  vpc_id     = var.vpc == null ? aws_vpc.vpc[0].id : var.vpc
-  cidr_block = var.subnet_ip_cidr_range
+  count             = var.subnet == null ? 2 : 0
+  vpc_id            = var.vpc == null ? aws_vpc.vpc[0].id : var.vpc
+  cidr_block        = var.subnet_ip_cidr_range[count.index]
+  availability_zone = data.aws_availability_zones.available.names[count.index]
 }
 
 # EKS Cluster Resources
@@ -44,7 +49,7 @@ resource "aws_eks_cluster" "primary" {
   role_arn = aws_iam_role.cluster-iam-role.arn
 
   vpc_config {
-    subnet_ids = var.subnet == null ? [aws_subnet.subnet[0].id] : [var.subnet]
+    subnet_ids = var.subnet == null ? [aws_subnet.subnet[0].id, aws_subnet.subnet[1].id] : [var.subnet]
   }
 
   depends_on = [
