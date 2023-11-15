@@ -8,7 +8,13 @@ variable "prefix" {}
 
 # variable "subnet" {}
 
+variable "allowed_ip_cidr_range" {}
+
 # variable "instance_count" {}
+
+# variable "instance_disk_size" {}
+
+# variable "instance_type" {}
 
 # variable "aws_access_key" {}
 
@@ -18,4 +24,4 @@ variable "prefix" {}
 
 variable "aws_region" {}
 
-# variable "neuvector_password" {}
+variable "neuvector_password" {}

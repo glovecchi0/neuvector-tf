@@ -32,7 +32,7 @@ variable "subnet" {
 #}
 
 variable "instance_count" {
-  default     = 1
+  default     = 3
   description = "The number of nodes per instance group"
 }
 

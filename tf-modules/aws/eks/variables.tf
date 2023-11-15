@@ -11,7 +11,7 @@ variable "vpc_ip_cidr_range" {
 variable "subnet_ip_cidr_range" {
   type        = list(any)
   default     = ["10.0.1.0/24", "10.0.2.0/24"]
-  description = "List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane."
+  description = "List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane"
 }
 
 variable "vpc" {
@@ -20,13 +20,29 @@ variable "vpc" {
 }
 
 variable "subnet" {
-  description = "AWS Subnet IDs used for all resources. Must be in at least two different availability zones."
+  description = "AWS Subnet IDs used for all resources. Must be in at least two different availability zones"
   default     = null
 }
 
+variable "allowed_ip_cidr_range" {
+  type        = string
+  description = "Range of IPs that can reach the cluster API Server"
+}
+
 variable "instance_count" {
-  default     = 1
+  default     = 3
   description = "The number of instances per Node Group"
+}
+
+variable "instance_disk_size" {
+  default     = "50"
+  description = "Size of the disk attached to each node, specified in GB"
+}
+
+variable "instance_type" {
+  type        = list(any)
+  default     = ["t2.xlarge"]
+  description = "The name of a AWS EC2 machine type"
 }
 
 # variable "aws_access_key" {}

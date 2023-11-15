@@ -52,5 +52,10 @@ provider "kubernetes" {
 provider "helm" {
   kubernetes {
     config_path = "${path.cwd}/${var.prefix}_kube_config.yml"
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["--region", "${var.aws_region}", "eks", "get-token", "--cluster-name", "${var.prefix}-cluster", "--output", "json"]
+      command     = "aws"
+    }
   }
 }
