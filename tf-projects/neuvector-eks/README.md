@@ -17,5 +17,5 @@ terraform init --upgrade ; terraform apply -target=module.aws-elastic-kubernetes
 
 - Destroy the resources when finished
 ```bash
-terraform destroy --auto-approve
+sh ./drain-nodes.sh ; terraform destroy --auto-approve
 ```
