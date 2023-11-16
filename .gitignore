@@ -16,3 +16,4 @@ terraform.tfvars
 
 # Allow
 !tf-modules/google-cloud/gke/template-kube_config.yml
+!tf-modules/aws/eks/template-kube_config.yml
