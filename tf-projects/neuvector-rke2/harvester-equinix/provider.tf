@@ -10,6 +10,16 @@ terraform {
       version = "3.2.0"
     }
 
+    ssh = {
+      source  = "loafoe/ssh"
+      version = "2.6.0"
+    }
+
+    harvester = {
+      source  = "harvester/harvester"
+      version = "0.6.3"
+    }
+
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = ">= 2.0.0"
@@ -31,6 +41,12 @@ provider "rancher2" {
   access_key = var.rancher_access_key
   secret_key = var.rancher_secret_key
   insecure   = var.rancher_insecure
+}
+
+provider "ssh" {}
+
+provider "harvester" {
+  kubeconfig = "${path.cwd}/${var.prefix}_kube_config.yml"
 }
 
 provider "kubernetes" {

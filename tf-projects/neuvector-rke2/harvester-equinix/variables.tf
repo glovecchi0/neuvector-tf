@@ -55,3 +55,43 @@ variable "rancher_insecure" {
   description = "Allow or not insecure connections to the Rancher API"
   default     = false
 }
+
+variable "kube_config_path" {
+  type        = string
+  description = "Harvester's RKE2 cluster kubeconfig file path"
+  default     = null
+}
+
+variable "kube_config_filename" {
+  type        = string
+  description = "Harvester's RKE2 cluster kubeconfig file name"
+  default     = null
+}
+
+# variable "os_image_name" {}
+
+# variable "os_image" {}
+
+# variable "os_image_url" {}
+
+variable "vm_count" {}
+
+variable "vm_namespace" {}
+
+# variable "description" {}
+
+# variable "ssh_username" {}
+
+# variable "cpu" {}
+
+# variable "memory" {}
+
+# variable "vm_disk_size" {}
+
+# variable "vm_data_disk_size" {}
+
+# variable "rke2_version" {}
+
+# variable "rke2_token" {}
+
+# variable "rke2_config" {}
