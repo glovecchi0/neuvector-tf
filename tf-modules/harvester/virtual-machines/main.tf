@@ -52,4 +52,8 @@ resource "harvester_virtualmachine" "default" {
     bus         = "virtio"
     auto_delete = true
   }
+
+  cloudinit {
+    user_data = var.startup_script
+  }
 }

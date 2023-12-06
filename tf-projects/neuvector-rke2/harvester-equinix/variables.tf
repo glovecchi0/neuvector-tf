@@ -90,8 +90,15 @@ variable "vm_namespace" {}
 
 # variable "vm_data_disk_size" {}
 
-# variable "rke2_version" {}
+# variable "startup_script" {}
 
-# variable "rke2_token" {}
+variable "rke2_version" {
+  type        = string
+  description = "RKE2 version"
+  default     = null
+}
 
-# variable "rke2_config" {}
+variable "rke2_config" {
+  description = "Additional customization to the RKE2 config.yaml file"
+  default     = null
+}

@@ -56,3 +56,8 @@ variable "vm_data_disk_size" {
   description = "Size of the data disk attached to each VMs, specified in GB"
   default     = 10
 }
+
+variable "startup_script" {
+  description = "Custom startup script"
+  default     = null
+}
