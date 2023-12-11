@@ -8,6 +8,8 @@
     -  `metro` to suit your Region
     -  `vm_count` to specify the number of VMs to create
     -  `vm_namespace` to specify the namespace where the VMs will be placed
+    -  `ssh_username` to specify the username used for SSH login
+    -  `ssh_password` to specify the password used for SSH login
 - Make sure you are logged into your Equinix Account from your local Terminal. See the preparatory steps [here](../../../tf-modules/harvester/infrastructure/README.md).
 
 **NB: If you want to use all the configurable variables in the `terraform.tfvars` file, you will need to uncomment them there and in the `variables.tf` and `main.tf` files.**
@@ -33,7 +35,21 @@ ssh -oStrictHostKeyChecking=no -i <PREFIX>-ssh_private_key.pem rancher@<PUBLIC_I
 
 # How to access Harvester VMs
 
+#### Install virtctl
+
+##### macOS installation and setup
+
 ```bash
-export KUBECONFIG=<PREFIX>_kube_config.yml
-kubectl -n <VM_NAMESPACE> exec -it virt-launcher-<PREFIX>-vm-<VM_COUNT>-<POD_HASH_CODE> -- bash
+export VERSION=v0.54.0
+wget https://github.com/kubevirt/kubevirt/releases/download/${VERSION}/virtctl-${VERSION}-darwin-amd64
+mv virtctl-v0.54.0-darwin-amd64 virtctl
+chmod +x virtctl
+sudo mv virtctl /usr/local/bin/
+virtctl version
+```
+
+#### Run the following command
+
+```bash
+virtctl ssh --local-ssh=true <SSH_USERNAME>@vmi/<VM_NAME>.<VM_NAMESPACE>
 ```

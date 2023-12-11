@@ -1,15 +1,24 @@
 resource "harvester_image" "image" {
+  count     = var.create_os_image == true ? 1 : 0
   name      = var.os_image_name
-  namespace = "harvester-public"
+  namespace = var.vm_namespace
 
   display_name = var.os_image
   source_type  = "download"
   url          = var.os_image_url
 }
 
+resource "random_string" "random" {
+  length  = 4
+  lower   = true
+  numeric = false
+  special = false
+  upper   = false
+}
+
 resource "harvester_virtualmachine" "default" {
   count                = var.vm_count
-  name                 = "${var.prefix}-vm-${count.index + 1}"
+  name                 = "${var.prefix}-vm-${count.index + 1}-${random_string.random.result}"
   namespace            = var.vm_namespace
   restart_after_update = true
 
@@ -25,7 +34,7 @@ resource "harvester_virtualmachine" "default" {
   secure_boot = true
 
   run_strategy    = "RerunOnFailure"
-  hostname        = "${var.prefix}-vm-${count.index + 1}"
+  hostname        = "${var.prefix}-vm-${count.index + 1}-${random_string.random.result}"
   reserved_memory = "256Mi"
   machine_type    = "q35"
 
@@ -41,7 +50,7 @@ resource "harvester_virtualmachine" "default" {
     bus        = "virtio"
     boot_order = 1
 
-    image       = harvester_image.image.id
+    image       = "${var.vm_namespace}/${var.os_image_name}"
     auto_delete = true
   }
 
@@ -54,6 +63,6 @@ resource "harvester_virtualmachine" "default" {
   }
 
   cloudinit {
-    user_data = var.startup_script
+    user_data_base64 = var.startup_script
   }
 }

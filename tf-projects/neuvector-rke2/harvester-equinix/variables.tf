@@ -68,6 +68,10 @@ variable "kube_config_filename" {
   default     = null
 }
 
+variable "create_os_image" {
+  default = null
+}
+
 # variable "os_image_name" {}
 
 # variable "os_image" {}
@@ -80,7 +84,9 @@ variable "vm_namespace" {}
 
 # variable "description" {}
 
-# variable "ssh_username" {}
+variable "ssh_username" {}
+
+variable "ssh_password" {}
 
 # variable "cpu" {}
 

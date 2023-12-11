@@ -1,3 +1,8 @@
+variable "create_os_image" {
+  description = "Harvester's VMs Image"
+  default     = true
+}
+
 variable "os_image_name" {
   description = "Harvester's VMs OS Image name"
   default     = "ubuntu22"
@@ -35,6 +40,11 @@ variable "description" {
 variable "ssh_username" {
   description = "Username used for SSH login"
   default     = "ubuntu"
+}
+
+variable "ssh_password" {
+  description = "Password used for SSH login"
+  default     = null
 }
 
 variable "cpu" {

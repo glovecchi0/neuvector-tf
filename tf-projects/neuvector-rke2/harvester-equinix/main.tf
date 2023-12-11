@@ -53,6 +53,11 @@ data "local_file" "ssh-private-key" {
   filename   = local.private_ssh_key_path
 }
 
+data "local_file" "ssh-public-key" {
+  depends_on = [module.harvester-equinix]
+  filename   = local.public_ssh_key_path
+}
+
 locals {
   kc_path = var.kube_config_path != null ? var.kube_config_path : path.cwd
   kc_file = var.kube_config_filename != null ? "${local.kc_path}/${var.kube_config_filename}" : "${local.kc_path}/${var.prefix}_kube_config.yml"
@@ -92,6 +97,7 @@ resource "random_password" "token" {
 }
 
 locals {
+  create_os_image                          = var.create_os_image == null ? false : true
   rke2_config_template                     = "${path.cwd}/rke2-config-yaml.tpl"
   rke2_token                               = random_password.token.result
   rke2_first_server_config_yaml_file       = "${path.cwd}/rke2-first-server-config-yaml.sh"
@@ -100,6 +106,8 @@ locals {
 
 resource "local_file" "rke2-first-server-config-yaml" {
   content = templatefile("${local.rke2_config_template}", {
+    ssh_username = var.ssh_username,
+    ssh_password = var.ssh_password,
     rke2_config  = var.rke2_config == null ? "false" : var.rke2_config,
     rke2_token   = local.rke2_token,
     rke2_version = var.rke2_version == null ? "false" : var.rke2_version,
@@ -114,8 +122,9 @@ data "local_file" "rke2-first-server-config-yaml-content" {
   filename   = local.rke2_first_server_config_yaml_file
 }
 
-module "harvester-virtual-machines" {
+module "harvester-first-virtual-machine" {
   source = "../../../tf-modules/harvester/virtual-machines"
+  #  create_os_image   = local.create_os_image
   #  os_image_name     = var.os_image_name
   #  os_image          = var.os_image
   #  os_image_url      = var.os_image_url
@@ -123,12 +132,49 @@ module "harvester-virtual-machines" {
   vm_count     = 1
   vm_namespace = kubernetes_namespace.harvester-vms-namespace.metadata[0].name
   #  description       = var.description
-  #  ssh_username      = var.ssh_username
+  ssh_username = var.ssh_username
   #  cpu               = var.cpu
   #  memory            = var.memory
   #  vm_disk_size      = var.vm_disk_size
   #  vm_data_disk_size = var.vm_data_disk_size
-  startup_script = data.local_file.rke2-first-server-config-yaml-content.content
+  startup_script = data.local_file.rke2-first-server-config-yaml-content.content_base64
+}
+
+resource "local_file" "rke2-additional-servers-config-yaml" {
+  depends_on = [module.harvester-first-virtual-machine]
+  content = templatefile("${local.rke2_config_template}", {
+    ssh_username = var.ssh_username,
+    ssh_password = var.ssh_password,
+    rke2_config  = var.rke2_config == null ? "false" : var.rke2_config,
+    rke2_token   = local.rke2_token,
+    rke2_version = var.rke2_version == null ? "false" : var.rke2_version,
+    server_ip    = module.harvester-first-virtual-machine.harvester_first_server_name
+  })
+  file_permission = "0644"
+  filename        = local.rke2_additional_servers_config_yaml_file
+}
+
+data "local_file" "rke2-additional-servers-config-yaml-content" {
+  depends_on = [local_file.rke2-additional-servers-config-yaml]
+  filename   = local.rke2_additional_servers_config_yaml_file
+}
+
+module "harvester-additional-virtual-machines" {
+  source          = "../../../tf-modules/harvester/virtual-machines"
+  create_os_image = local.create_os_image
+  #  os_image_name     = var.os_image_name
+  #  os_image          = var.os_image
+  #  os_image_url      = var.os_image_url
+  prefix       = var.prefix
+  vm_count     = var.vm_count - 1
+  vm_namespace = kubernetes_namespace.harvester-vms-namespace.metadata[0].name
+  #  description       = var.description
+  ssh_username = var.ssh_username
+  #  cpu               = var.cpu
+  #  memory            = var.memory
+  #  vm_disk_size      = var.vm_disk_size
+  #  vm_data_disk_size = var.vm_data_disk_size
+  startup_script = data.local_file.rke2-additional-servers-config-yaml-content.content_base64
 }
 
 # RKE2 CLUSTER DONE
