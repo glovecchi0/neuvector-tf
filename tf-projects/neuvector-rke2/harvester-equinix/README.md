@@ -15,12 +15,12 @@
 **NB: If you want to use all the configurable variables in the `terraform.tfvars` file, you will need to uncomment them there and in the `variables.tf` and `main.tf` files.**
 
 ```bash
-terraform init -upgrade ; terraform apply -target=module.harvester-equinix.tls_private_key.ssh_private_key -target=module.harvester-equinix.local_file.private_key_pem -target=module.harvester-equinix.local_file.public_key_pem -auto-approve ; terraform apply -target=module.harvester-equinix -target=null_resource.wait-harvester-services-startup -auto-approve ; terraform apply -target=local_file.ssh-private-key -target=ssh_resource.retrieve-kubeconfig -target=local_file.kubeconfig-yaml -auto-approve ; terraform apply -auto-approve
+terraform init -upgrade ; terraform apply -target=module.harvester-equinix.tls_private_key.ssh_private_key -target=module.harvester-equinix.local_file.private_key_pem -target=module.harvester-equinix.local_file.public_key_pem -auto-approve ; terraform apply -target=module.harvester-equinix -target=null_resource.wait-harvester-services-startup -auto-approve ; terraform apply -target=local_file.ssh-private-key -target=ssh_resource.retrieve-kubeconfig -target=local_file.kubeconfig-yaml -auto-approve ; terraform apply -target=module.harvester-first-virtual-machine.harvester_image.image -auto-approve ; terraform apply -auto-approve
 ```
 
 - Destroy the resources when finished
 ```bash
-terraform destroy -target=module.harvester-equinix -auto-approve
+terraform destroy -target=module.harvester-first-virtual-machine -target=module.harvester-additional-virtual-machines -auto-approve ; terraform destroy -auto-approve
 ```
 
 ## How to access Equinix instances

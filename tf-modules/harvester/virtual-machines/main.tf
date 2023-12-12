@@ -40,6 +40,7 @@ resource "harvester_virtualmachine" "default" {
 
   network_interface {
     name           = "nic-1"
+    type           = "bridge" #https://groups.google.com/g/kubevirt-dev/c/HyMWzPQGBoM
     wait_for_lease = true
   }
 

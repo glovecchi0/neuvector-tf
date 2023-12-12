@@ -49,12 +49,12 @@ variable "ssh_password" {
 
 variable "cpu" {
   description = "VMs CPU"
-  default     = 2
+  default     = 8
 }
 
 variable "memory" {
   description = "VMs Memory, specified in GB"
-  default     = 8
+  default     = 16
 }
 
 variable "vm_disk_size" {

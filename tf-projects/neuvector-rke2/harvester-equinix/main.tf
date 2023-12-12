@@ -89,7 +89,7 @@ resource "kubernetes_namespace" "harvester-vms-namespace" {
 
 # INFRASTRUCTURE DONE
 
-# HARVESTER VIRTUAL MACHINES - RKE2 CLUSTER
+# HARVESTER VIRTUAL MACHINES - RKE2 CLUSTER & NEUVECTOR
 
 resource "random_password" "token" {
   length  = 40
@@ -111,7 +111,8 @@ resource "local_file" "rke2-first-server-config-yaml" {
     rke2_config  = var.rke2_config == null ? "false" : var.rke2_config,
     rke2_token   = local.rke2_token,
     rke2_version = var.rke2_version == null ? "false" : var.rke2_version,
-    server_ip    = "false"
+    server_ip    = "false",
+    nv_password  = ""
   })
   file_permission = "0644"
   filename        = local.rke2_first_server_config_yaml_file
@@ -148,7 +149,8 @@ resource "local_file" "rke2-additional-servers-config-yaml" {
     rke2_config  = var.rke2_config == null ? "false" : var.rke2_config,
     rke2_token   = local.rke2_token,
     rke2_version = var.rke2_version == null ? "false" : var.rke2_version,
-    server_ip    = module.harvester-first-virtual-machine.harvester_first_server_name
+    server_ip    = module.harvester-first-virtual-machine.harvester_first_virtual_machine_ip,
+    nv_password  = var.neuvector_password
   })
   file_permission = "0644"
   filename        = local.rke2_additional_servers_config_yaml_file
@@ -177,36 +179,4 @@ module "harvester-additional-virtual-machines" {
   startup_script = data.local_file.rke2-additional-servers-config-yaml-content.content_base64
 }
 
-# RKE2 CLUSTER DONE
-
-#resource "null_resource" "first-setup" {
-#  depends_on = [module.google-kubernetes-engine.kubernetes_cluster_node_pool]
-#  provisioner "local-exec" {
-#    command = "sh ./first-setup.sh"
-#  }
-#}
-
-#resource "helm_release" "neuvector-core" {
-#  depends_on       = [resource.null_resource.first-setup]
-#  name             = "neuvector"
-#  repository       = "https://neuvector.github.io/neuvector-helm/"
-#  chart            = "core"
-#  create_namespace = true
-#  namespace        = "cattle-neuvector-system"
-#
-#  values = [
-#    "${file("${path.cwd}/custom-helm-values.yaml")}"
-#  ]
-#
-#  set {
-#    name  = "controller.secret.data.userinitcfg\\.yaml.users[0].Password"
-#    value = var.neuvector_password
-#  }
-#}
-
-#data "kubernetes_service" "neuvector-service-webui" {
-#  metadata {
-#    name      = "neuvector-service-webui"
-#    namespace = resource.helm_release.neuvector-core.namespace
-#  }
-#}
+# RKE2 CLUSTER & NEUVECTOR DONE
