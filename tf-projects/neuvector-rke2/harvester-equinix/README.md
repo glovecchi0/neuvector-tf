@@ -20,7 +20,7 @@ terraform init -upgrade ; terraform apply -target=module.harvester-equinix.tls_p
 
 - Destroy the resources when finished
 ```bash
-terraform destroy -target=module.harvester-first-virtual-machine -target=module.harvester-additional-virtual-machines -auto-approve ; terraform destroy -auto-approve
+terraform state rm module.harvester-first-virtual-machine.harvester_image.image ; terraform destroy -target=module.harvester-first-virtual-machine -target=module.harvester-additional-virtual-machines -auto-approve ; terraform destroy -auto-approve
 ```
 
 ## How to access Equinix instances

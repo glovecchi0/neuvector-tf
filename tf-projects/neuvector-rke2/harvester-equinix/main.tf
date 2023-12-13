@@ -111,8 +111,7 @@ resource "local_file" "rke2-first-server-config-yaml" {
     rke2_config  = var.rke2_config == null ? "false" : var.rke2_config,
     rke2_token   = local.rke2_token,
     rke2_version = var.rke2_version == null ? "false" : var.rke2_version,
-    server_ip    = "false",
-    nv_password  = ""
+    server_ip    = "false"
   })
   file_permission = "0644"
   filename        = local.rke2_first_server_config_yaml_file
@@ -149,8 +148,7 @@ resource "local_file" "rke2-additional-servers-config-yaml" {
     rke2_config  = var.rke2_config == null ? "false" : var.rke2_config,
     rke2_token   = local.rke2_token,
     rke2_version = var.rke2_version == null ? "false" : var.rke2_version,
-    server_ip    = module.harvester-first-virtual-machine.harvester_first_virtual_machine_ip,
-    nv_password  = var.neuvector_password
+    server_ip    = module.harvester-first-virtual-machine.harvester_first_virtual_machine_ip
   })
   file_permission = "0644"
   filename        = local.rke2_additional_servers_config_yaml_file

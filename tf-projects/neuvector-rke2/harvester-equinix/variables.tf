@@ -108,5 +108,3 @@ variable "rke2_config" {
   description = "Additional customization to the RKE2 config.yaml file"
   default     = null
 }
-
-variable "neuvector_password" {}
