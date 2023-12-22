@@ -8,8 +8,8 @@
     -  `metro` to suit your Region
     -  `vm_count` to specify the number of VMs to create
     -  `vm_namespace` to specify the namespace where the VMs will be placed
-    -  `ssh_username` to specify the username used for SSH login
-    -  `ssh_password` to specify the password used for SSH login
+    -  `ssh_username` to specify the username used for SSH login to Harvester's Virtual Machines
+    -  `ssh_password` to specify the password used for SSH login to Harvester's Virtual Machines
 - Make sure you are logged into your Equinix Account from your local Terminal. See the preparatory steps [here](../../../tf-modules/harvester/infrastructure/README.md).
 
 **NB: If you want to use all the configurable variables in the `terraform.tfvars` file, you will need to uncomment them there and in the `variables.tf` and `main.tf` files.**
