@@ -9,3 +9,7 @@ output "seed_ip" {
 output "join_ips" {
   value = length(data.equinix_metal_device.join_devices) == 0 ? ["none"] : data.equinix_metal_device.join_devices.*.access_public_ipv4
 }
+
+output "helper_ip" {
+  value = data.equinix_metal_device.helper_device.access_public_ipv4
+}

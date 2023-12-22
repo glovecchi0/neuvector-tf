@@ -10,21 +10,21 @@ module "harvester-equinix" {
   prefix       = var.prefix
   project_name = var.project_name
   metro        = var.metro
-  #  create_ssh_key_pair  = var.create_ssh_key_pair
-  #  ssh_private_key_path = local.private_ssh_key_path
-  #  ssh_public_key_path  = local.public_ssh_key_path
-  #  ipxe_script          = var.ipxe_script
-  #  vlan_count           = var.vlan_count
-  #  instance_count       = var.instance_count
-  #  plan                 = var.plan
-  #  billing_cycle        = var.billing_cycle
-  #  spot_instance        = var.spot_instance
-  #  max_bid_price        = var.max_bid_price
-  #  harvester_version    = var.harvester_version
-  #  rancher_api_url      = var.rancher_api_url
-  #  rancher_access_key   = var.rancher_access_key
-  #  rancher_secret_key   = var.rancher_secret_key
-  #  rancher_insecure     = var.rancher_insecure
+  #  create_ssh_key_pair   = var.create_ssh_key_pair
+  #  ssh_private_key_path  = local.private_ssh_key_path
+  #  ssh_public_key_path   = local.public_ssh_key_path
+  #  ipxe_script           = var.ipxe_script
+  #  vlan_count            = var.vlan_count
+  #  instance_count        = var.instance_count
+  #  plan                  = var.plan
+  #  billing_cycle         = var.billing_cycle
+  #  spot_instance         = var.spot_instance
+  #  max_bid_price         = var.max_bid_price
+  #  harvester_version     = var.harvester_version
+  #  rancher_api_url       = var.rancher_api_url
+  #  rancher_access_key    = var.rancher_access_key
+  #  rancher_secret_key    = var.rancher_secret_key
+  #  rancher_insecure      = var.rancher_insecure
 }
 
 resource "null_resource" "wait-harvester-services-startup" {
@@ -98,6 +98,7 @@ resource "random_password" "token" {
 
 locals {
   create_os_image                          = var.create_os_image == null ? false : true
+  create_secondary_network                 = var.create_secondary_network == null ? false : true
   rke2_config_template                     = "${path.cwd}/rke2-config-yaml.tpl"
   rke2_token                               = random_password.token.result
   rke2_first_server_config_yaml_file       = "${path.cwd}/rke2-first-server-config-yaml.sh"
@@ -128,6 +129,9 @@ module "harvester-first-virtual-machine" {
   #  os_image_name     = var.os_image_name
   #  os_image          = var.os_image
   #  os_image_url      = var.os_image_url
+  #  create_secondary_network = local.create_secondary_network
+  #  cluster_network_name     = var.cluster_network_name
+  #  vlan_uplink_nic          = var.vlan_uplink_nic
   prefix       = var.prefix
   vm_count     = 1
   vm_namespace = kubernetes_namespace.harvester-vms-namespace.metadata[0].name
@@ -165,6 +169,9 @@ module "harvester-additional-virtual-machines" {
   #  os_image_name     = var.os_image_name
   #  os_image          = var.os_image
   #  os_image_url      = var.os_image_url
+  create_secondary_network = local.create_secondary_network
+  #  cluster_network_name     = var.cluster_network_name
+  #  vlan_uplink_nic          = var.vlan_uplink_nic
   prefix       = var.prefix
   vm_count     = var.vm_count - 1
   vm_namespace = kubernetes_namespace.harvester-vms-namespace.metadata[0].name

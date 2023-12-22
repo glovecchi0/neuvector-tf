@@ -17,6 +17,11 @@ data "equinix_metal_spot_market_request" "join_req" {
   request_id = equinix_metal_spot_market_request.join_spot_request[count.index].id
 }
 
+data "equinix_metal_spot_market_request" "helper_req" {
+  count      = var.spot_instance ? 1 : 0
+  request_id = equinix_metal_spot_market_request.helper_spot_request.0.id
+}
+
 data "equinix_metal_device" "seed_device" {
   device_id = var.spot_instance ? data.equinix_metal_spot_market_request.seed_req.0.device_ids[0] : equinix_metal_device.seed.0.id
 }
@@ -24,6 +29,10 @@ data "equinix_metal_device" "seed_device" {
 data "equinix_metal_device" "join_devices" {
   count     = var.instance_count - 1
   device_id = var.spot_instance ? data.equinix_metal_spot_market_request.join_req[count.index].device_ids[0] : equinix_metal_device.join[count.index].id
+}
+
+data "equinix_metal_device" "helper_device" {
+  device_id = var.spot_instance ? data.equinix_metal_spot_market_request.helper_req.0.device_ids[0] : equinix_metal_device.helper.0.id
 }
 
 resource "random_password" "password" {
@@ -169,10 +178,61 @@ resource "equinix_metal_spot_market_request" "join_spot_request" {
   }
 }
 
+resource "equinix_metal_device" "helper" {
+  count            = var.instance_count >= 1 && !var.spot_instance ? 1 : 0
+  hostname         = "${var.prefix}-helper"
+  plan             = var.plan
+  metro            = var.metro
+  operating_system = "ubuntu_22_04"
+  billing_cycle    = var.billing_cycle
+  project_id       = data.equinix_metal_project.project.project_id
+  user_data = templatefile("${path.module}/helper.tpl", {
+    ssh_key = var.ssh_public_key_path == null ? "${file("${path.cwd}/${var.prefix}-ssh_public_key.pem")}" : "${file("${var.ssh_public_key_path}")}",
+    count   = "${count.index + 1}"
+  })
+}
+
+resource "equinix_metal_spot_market_request" "helper_spot_request" {
+  count            = var.instance_count >= 1 && var.spot_instance ? 1 : 0
+  project_id       = data.equinix_metal_project.project.project_id
+  max_bid_price    = var.max_bid_price
+  metro            = var.metro
+  devices_min      = 1
+  devices_max      = 1
+  wait_for_devices = true
+
+  instance_parameters {
+    hostname         = "${var.prefix}-helper"
+    billing_cycle    = "hourly"
+    operating_system = "ubuntu_22_04"
+    plan             = var.plan
+    userdata = templatefile("${path.module}/helper.tpl", {
+      ssh_key = var.ssh_public_key_path == null ? "${file("${path.cwd}/${var.prefix}-ssh_public_key.pem")}" : "${file("${var.ssh_public_key_path}")}",
+      count   = "${count.index + 1}"
+    })
+  }
+}
+
 resource "equinix_metal_vlan" "vlans" {
   count      = var.vlan_count
   project_id = data.equinix_metal_project.project.project_id
   metro      = var.metro
+}
+
+resource "equinix_metal_device_network_type" "seed_network_type" {
+  device_id = data.equinix_metal_device.seed_device.id
+  type      = "hybrid"
+}
+
+resource "equinix_metal_device_network_type" "join_network_type" {
+  count     = var.vlan_count * (var.instance_count - 1)
+  device_id = data.equinix_metal_device.join_devices[count.index % (var.instance_count - 1)].id
+  type      = "hybrid"
+}
+
+resource "equinix_metal_device_network_type" "helper_network_type" {
+  device_id = data.equinix_metal_device.helper_device.id
+  type      = "hybrid"
 }
 
 resource "equinix_metal_port_vlan_attachment" "vlan_attach_seed" {
@@ -186,6 +246,13 @@ resource "equinix_metal_port_vlan_attachment" "vlan_attach_join" {
   count     = var.vlan_count * (var.instance_count - 1)
   device_id = data.equinix_metal_device.join_devices[count.index % (var.instance_count - 1)].id
   vlan_vnid = equinix_metal_vlan.vlans[floor(count.index / (var.instance_count - 1))].vxlan
+  port_name = "bond0"
+}
+
+resource "equinix_metal_port_vlan_attachment" "vlan_attach_helper" {
+  count     = var.vlan_count
+  device_id = data.equinix_metal_device.helper_device.id
+  vlan_vnid = equinix_metal_vlan.vlans[count.index].vxlan
   port_name = "bond0"
 }
 

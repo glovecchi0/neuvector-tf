@@ -78,6 +78,14 @@ variable "create_os_image" {
 
 # variable "os_image_url" {}
 
+variable "create_secondary_network" {
+  default = null
+}
+
+# variable "cluster_network_name" {}
+
+# variable "vlan_uplink_nic" {}
+
 variable "vm_count" {}
 
 variable "vm_namespace" {}

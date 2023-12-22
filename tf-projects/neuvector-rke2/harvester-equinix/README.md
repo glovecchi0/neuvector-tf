@@ -51,5 +51,6 @@ virtctl version
 #### Run the following command
 
 ```bash
-virtctl ssh --local-ssh=true <SSH_USERNAME>@vmi/<VM_NAME>.<VM_NAMESPACE>
+kubectl -n <PREFIX>-ns get vmi
+virtctl ssh --local-ssh=true <SSH_USERNAME>@vmi/<VM_NAME>.<PREFIX>-ns
 ```
