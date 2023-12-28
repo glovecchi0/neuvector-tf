@@ -8,43 +8,6 @@ resource "harvester_image" "image" {
   url          = var.os_image_url
 }
 
-resource "harvester_clusternetwork" "cluster-vlan" {
-  count = var.create_secondary_network == true ? 1 : 0
-  name  = var.cluster_network_name
-}
-
-resource "harvester_vlanconfig" "cluster-vlan-config" {
-  count = var.create_secondary_network == true ? 1 : 0
-  name  = "${harvester_clusternetwork.cluster-vlan[0].name}-config"
-
-  cluster_network_name = harvester_clusternetwork.cluster-vlan[0].name
-
-  uplink {
-    nics = [
-      "${var.vlan_uplink_nic}"
-    ]
-
-    bond_mode = "active-backup"
-  }
-}
-
-resource "harvester_network" "vm-network" {
-  count     = var.create_secondary_network == true ? 1 : 0
-  name      = var.cluster_network_name
-  namespace = var.vm_namespace
-
-  vlan_id = 1
-
-  route_mode    = "manual"
-  route_cidr    = "172.16.0.1/24"
-  route_gateway = "172.16.0.1"
-
-  cluster_network_name = var.cluster_network_name
-  depends_on = [
-    harvester_vlanconfig.cluster-vlan-config
-  ]
-}
-
 resource "random_string" "random" {
   length  = 4
   lower   = true
@@ -81,12 +44,6 @@ resource "harvester_virtualmachine" "default" {
     wait_for_lease = true
   }
 
-  network_interface {
-    name         = "nic-2"
-    type         = "bridge" #https://groups.google.com/g/kubevirt-dev/c/HyMWzPQGBoM
-    network_name = var.cluster_network_name
-  }
-
   disk {
     name       = "rootdisk"
     type       = "disk"
@@ -107,12 +64,10 @@ resource "harvester_virtualmachine" "default" {
   }
 
   cloudinit {
-    user_data_base64    = var.startup_script
-    network_data_base64 = var.network_config_script
+    user_data_base64 = var.startup_script
   }
 
   depends_on = [
-    harvester_network.vm-network,
     harvester_image.image
   ]
 }

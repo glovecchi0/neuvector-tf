@@ -98,7 +98,6 @@ resource "random_password" "token" {
 
 locals {
   create_os_image                          = var.create_os_image == null ? false : true
-  create_secondary_network                 = var.create_secondary_network == null ? false : true
   rke2_config_template                     = "${path.cwd}/rke2-config-yaml.tpl"
   rke2_token                               = random_password.token.result
   rke2_first_server_config_yaml_file       = "${path.cwd}/rke2-first-server-config-yaml.sh"
@@ -129,9 +128,6 @@ module "harvester-first-virtual-machine" {
   #  os_image_name     = var.os_image_name
   #  os_image          = var.os_image
   #  os_image_url      = var.os_image_url
-  #  create_secondary_network = local.create_secondary_network
-  #  cluster_network_name     = var.cluster_network_name
-  #  vlan_uplink_nic          = var.vlan_uplink_nic
   prefix       = var.prefix
   vm_count     = 1
   vm_namespace = kubernetes_namespace.harvester-vms-namespace.metadata[0].name
@@ -169,9 +165,6 @@ module "harvester-additional-virtual-machines" {
   #  os_image_name     = var.os_image_name
   #  os_image          = var.os_image
   #  os_image_url      = var.os_image_url
-  create_secondary_network = local.create_secondary_network
-  #  cluster_network_name     = var.cluster_network_name
-  #  vlan_uplink_nic          = var.vlan_uplink_nic
   prefix       = var.prefix
   vm_count     = var.vm_count - 1
   vm_namespace = kubernetes_namespace.harvester-vms-namespace.metadata[0].name

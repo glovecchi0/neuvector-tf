@@ -18,21 +18,6 @@ variable "os_image_url" {
   default     = "https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img"
 }
 
-variable "create_secondary_network" {
-  description = "Harvester's Network"
-  default     = true
-}
-
-variable "cluster_network_name" {
-  description = "Harvester's Secondary Cluster Network name"
-  default     = "secondary"
-}
-
-variable "vlan_uplink_nic" {
-  description = "Harvester's VLAN Uplink NIC"
-  default     = "enp1s0f1"
-}
-
 variable "prefix" {
   description = "The prefix used in front of all Equnix resources"
 }
@@ -84,10 +69,5 @@ variable "vm_data_disk_size" {
 
 variable "startup_script" {
   description = "Custom startup script"
-  default     = null
-}
-
-variable "network_config_script" {
-  description = "Custom network startup script - Necessary to configure 2 NICs for example"
   default     = null
 }

@@ -29,6 +29,8 @@ No modules.
 |------|------|
 | [equinix_metal_device.join](https://registry.terraform.io/providers/equinix/equinix/1.20.0/docs/resources/metal_device) | resource |
 | [equinix_metal_device.seed](https://registry.terraform.io/providers/equinix/equinix/1.20.0/docs/resources/metal_device) | resource |
+| [equinix_metal_device_network_type.join_network_type](https://registry.terraform.io/providers/equinix/equinix/1.20.0/docs/resources/metal_device_network_type) | resource |
+| [equinix_metal_device_network_type.seed_network_type](https://registry.terraform.io/providers/equinix/equinix/1.20.0/docs/resources/metal_device_network_type) | resource |
 | [equinix_metal_ip_attachment.first_address_assignment](https://registry.terraform.io/providers/equinix/equinix/1.20.0/docs/resources/metal_ip_attachment) | resource |
 | [equinix_metal_port_vlan_attachment.vlan_attach_join](https://registry.terraform.io/providers/equinix/equinix/1.20.0/docs/resources/metal_port_vlan_attachment) | resource |
 | [equinix_metal_port_vlan_attachment.vlan_attach_seed](https://registry.terraform.io/providers/equinix/equinix/1.20.0/docs/resources/metal_port_vlan_attachment) | resource |

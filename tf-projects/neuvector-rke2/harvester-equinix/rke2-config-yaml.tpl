@@ -50,5 +50,5 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 %{ if server_ip != "false" }
 sudo helm repo add neuvector https://neuvector.github.io/neuvector-helm/
 echo "kubectl create namespace cattle-neuvector-system || true" | sudo su -
-echo "helm -n cattle-neuvector-system install neuvector --set manager.svc.type=NodePort neuvector/core" | sudo su -
+echo "helm -n cattle-neuvector-system install neuvector --set k3s.enabled=true --set manager.svc.type=NodePort neuvector/core" | sudo su -
 %{ endif }
