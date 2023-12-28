@@ -52,8 +52,8 @@ virtctl version
 
 ```bash
 export KUBECONFIG=<PREFIX>_kube_config.yml
-kubectl -n <PREFIX>-ns get vmi
-virtctl ssh --local-ssh=true <SSH_USERNAME>@vmi/<VM_NAME>.<PREFIX>-ns
+kubectl -n <VM_NAMESPACE> get vmi
+virtctl ssh --local-ssh=true <SSH_USERNAME>@vmi/<VM_NAME>.<VM_NAMESPACE>
 ```
 
 ## How to access NeuVector UI
@@ -64,20 +64,20 @@ virtctl ssh --local-ssh=true <SSH_USERNAME>@vmi/<VM_NAME>.<PREFIX>-ns
 
 ```bash
 export KUBECONFIG=<PREFIX>_kube_config.yml
-kubectl -n <PREFIX>-ns get vmi
-virtctl ssh --local-ssh=true <SSH_USERNAME>@vmi/<VM_NAME>.<PREFIX>-ns
+kubectl -n <VM_NAMESPACE> get vmi
+virtctl ssh --local-ssh=true <SSH_USERNAME>@vmi/<VM_NAME>.<VM_NAMESPACE>
 kubectl -n cattle-neuvector-system get pods -l app=neuvector-manager-pod -owide #NODE_NAME
 kubectl -n cattle-neuvector-system get svc neuvector-service-webui -owide #NODE_PORT
 ```
 
 ##### Use the outputs of the commands executed in the previous step to forward the service
 ```bash
-virtctl -n <PREFIX>-ns expose vm NODE_NAME --name neuvector-console --type NodePort --port NODE_PORT
+virtctl -n <VM_NAMESPACE> expose vm NODE_NAME --name neuvector-console --type NodePort --port NODE_PORT
 ```
 
 ##### Get the port assigned to your new NodePort service and connect to NeuVector UI
 ```bash
-kubectl -n <PREFIX>-ns get svc
+kubectl -n <VM_NAMESPACE> get svc
 nc -v -w1 INSTANCE_PUBLIC_IP NODE_PORT #TEST
 ```
 
