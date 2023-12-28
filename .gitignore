@@ -9,6 +9,9 @@ crash.log
 # Files that may contain secrets
 terraform.tfvars
 *kube_config.yml*
+*-ssh_private_key.pem*
+*-ssh_public_key.pem*
+*config-yaml*
 
 # Temporary files
 **/*.swp
@@ -17,3 +20,4 @@ terraform.tfvars
 # Allow
 !tf-modules/google-cloud/gke/template-kube_config.yml
 !tf-modules/aws/eks/template-kube_config.yml
+!tf-projects/neuvector-rke2/harvester-equinix/rke2-config-yaml.tpl

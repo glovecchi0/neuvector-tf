@@ -27,9 +27,9 @@ variable "subnet" {
 }
 
 # variable "cluster_version" {
-#  default     = "1.26.7-gke.500"
-#  description = "Supported Google Kubernetes Engine for Rancher Manager"
-#}
+#   default     = "1.26.7-gke.500"
+#   description = "Supported Google Kubernetes Engine for Rancher Manager"
+# }
 
 variable "instance_count" {
   default     = 1
