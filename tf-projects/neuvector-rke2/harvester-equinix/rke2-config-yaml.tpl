@@ -2,7 +2,8 @@
 
 sudo adduser -U -m "${ssh_username}"
 echo "${ssh_username}:${ssh_password}" | chpasswd
-sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+sudo sed -i "s/#PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+sudo sed -i "s@Include /etc/ssh/sshd_config.d/\*.conf@#Include /etc/ssh/sshd_config.d/*.conf@g" /etc/ssh/sshd_config
 sudo systemctl restart ssh
 
 cat > /tmp/config.yaml <<EOF
