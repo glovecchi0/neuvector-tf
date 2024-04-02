@@ -13,8 +13,9 @@ resource "google_compute_subnetwork" "subnet" {
 }
 
 resource "google_container_cluster" "primary" {
-  name     = "${var.prefix}-cluster"
-  location = var.region
+  name                = "${var.prefix}-cluster"
+  location            = var.region
+  deletion_protection = false
 
   remove_default_node_pool = true
   initial_node_count       = 1
