@@ -30,6 +30,6 @@ $ gcloud version
 
 ## AWS CLI
 ```console
-$ aws --version
+$ aws --version
   aws-cli/2.13.33 Python/3.11.6 Darwin/23.2.0 exe/x86_64 prompt/off
 ```
