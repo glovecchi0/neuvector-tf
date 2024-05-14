@@ -11,7 +11,7 @@ $ tofu version
   on darwin_arm64
 
 ## gcloud CLI
-$ gcloud version
+$ gcloud version
   Google Cloud SDK 468.0.0
   bq 2.0.101
   core 2024.03.08
