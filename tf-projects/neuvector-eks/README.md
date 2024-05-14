@@ -11,6 +11,7 @@
 
 **NB: If you want to use all the configurable variables in the `terraform.tfvars` file, you will need to uncomment them there and in the `variables.tf` and `main.tf` files.**
 
+#### Terraform
 ```bash
 terraform init --upgrade ; terraform apply -target=module.aws-elastic-kubernetes-service --auto-approve ; terraform apply --auto-approve
 ```
@@ -18,4 +19,14 @@ terraform init --upgrade ; terraform apply -target=module.aws-elastic-kubernetes
 - Destroy the resources when finished
 ```bash
 sh ./drain-nodes.sh ; terraform destroy --auto-approve
+```
+
+#### OpenTofu
+```bash
+tofu init --upgrade ; tofu apply -target=module.aws-elastic-kubernetes-service --auto-approve ; tofu apply --auto-approve
+```
+
+- Destroy the resources when finished
+```bash
+sh ./drain-nodes.sh ; tofu destroy --auto-approve
 ```
