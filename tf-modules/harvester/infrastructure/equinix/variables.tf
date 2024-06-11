@@ -65,7 +65,7 @@ variable "max_bid_price" {
 
 variable "harvester_version" {
   description = "Harvester's version"
-  default     = "v1.2.1"
+  default     = "v1.3.0"
 }
 
 variable "rancher_api_url" {

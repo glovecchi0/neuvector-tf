@@ -2,13 +2,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_harvester"></a> [harvester](#requirement\_harvester) | 0.6.3 |
+| <a name="requirement_harvester"></a> [harvester](#requirement\_harvester) | 0.6.4 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_harvester"></a> [harvester](#provider\_harvester) | 0.6.3 |
+| <a name="provider_harvester"></a> [harvester](#provider\_harvester) | 0.6.4 |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
@@ -19,8 +19,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [harvester_image.image](https://registry.terraform.io/providers/harvester/harvester/0.6.3/docs/resources/image) | resource |
-| [harvester_virtualmachine.default](https://registry.terraform.io/providers/harvester/harvester/0.6.3/docs/resources/virtualmachine) | resource |
+| [harvester_image.image](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/resources/image) | resource |
+| [harvester_virtualmachine.default](https://registry.terraform.io/providers/harvester/harvester/0.6.4/docs/resources/virtualmachine) | resource |
 | [random_string.random](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 
 ## Inputs

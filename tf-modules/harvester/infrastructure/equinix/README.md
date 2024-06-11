@@ -6,16 +6,16 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_equinix"></a> [equinix](#requirement\_equinix) | 1.22.0 |
-| <a name="requirement_rancher2"></a> [rancher2](#requirement\_rancher2) | 3.2.0 |
+| <a name="requirement_equinix"></a> [equinix](#requirement\_equinix) | 1.36.4 |
+| <a name="requirement_rancher2"></a> [rancher2](#requirement\_rancher2) | 4.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_equinix"></a> [equinix](#provider\_equinix) | 1.22.0 |
+| <a name="provider_equinix"></a> [equinix](#provider\_equinix) | 1.36.4 |
 | <a name="provider_local"></a> [local](#provider\_local) | n/a |
-| <a name="provider_rancher2"></a> [rancher2](#provider\_rancher2) | 3.2.0 |
+| <a name="provider_rancher2"></a> [rancher2](#provider\_rancher2) | 4.1.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | n/a |
 
@@ -27,29 +27,29 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [equinix_metal_device.join](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_device) | resource |
-| [equinix_metal_device.seed](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_device) | resource |
-| [equinix_metal_device_network_type.join_network_type](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_device_network_type) | resource |
-| [equinix_metal_device_network_type.seed_network_type](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_device_network_type) | resource |
-| [equinix_metal_ip_attachment.first_address_assignment](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_ip_attachment) | resource |
-| [equinix_metal_port_vlan_attachment.vlan_attach_join](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_port_vlan_attachment) | resource |
-| [equinix_metal_port_vlan_attachment.vlan_attach_seed](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_port_vlan_attachment) | resource |
-| [equinix_metal_reserved_ip_block.harvester_vip](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_reserved_ip_block) | resource |
-| [equinix_metal_spot_market_request.join_spot_request](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_spot_market_request) | resource |
-| [equinix_metal_spot_market_request.seed_spot_request](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_spot_market_request) | resource |
-| [equinix_metal_vlan.vlans](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/resources/metal_vlan) | resource |
+| [equinix_metal_device.join](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_device) | resource |
+| [equinix_metal_device.seed](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_device) | resource |
+| [equinix_metal_device_network_type.join_network_type](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_device_network_type) | resource |
+| [equinix_metal_device_network_type.seed_network_type](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_device_network_type) | resource |
+| [equinix_metal_ip_attachment.first_address_assignment](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_ip_attachment) | resource |
+| [equinix_metal_port_vlan_attachment.vlan_attach_join](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_port_vlan_attachment) | resource |
+| [equinix_metal_port_vlan_attachment.vlan_attach_seed](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_port_vlan_attachment) | resource |
+| [equinix_metal_reserved_ip_block.harvester_vip](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_reserved_ip_block) | resource |
+| [equinix_metal_spot_market_request.join_spot_request](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_spot_market_request) | resource |
+| [equinix_metal_spot_market_request.seed_spot_request](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_spot_market_request) | resource |
+| [equinix_metal_vlan.vlans](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/resources/metal_vlan) | resource |
 | [local_file.private_key_pem](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [local_file.public_key_pem](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
-| [rancher2_cluster.rancher_cluster](https://registry.terraform.io/providers/rancher/rancher2/3.2.0/docs/resources/cluster) | resource |
+| [rancher2_cluster.rancher_cluster](https://registry.terraform.io/providers/rancher/rancher2/4.1.0/docs/resources/cluster) | resource |
 | [random_password.password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.token](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [tls_private_key.ssh_private_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
-| [equinix_metal_device.join_devices](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/data-sources/metal_device) | data source |
-| [equinix_metal_device.seed_device](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/data-sources/metal_device) | data source |
-| [equinix_metal_ip_block_ranges.address_block](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/data-sources/metal_ip_block_ranges) | data source |
-| [equinix_metal_project.project](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/data-sources/metal_project) | data source |
-| [equinix_metal_spot_market_request.join_req](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/data-sources/metal_spot_market_request) | data source |
-| [equinix_metal_spot_market_request.seed_req](https://registry.terraform.io/providers/equinix/equinix/1.22.0/docs/data-sources/metal_spot_market_request) | data source |
+| [equinix_metal_device.join_devices](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/data-sources/metal_device) | data source |
+| [equinix_metal_device.seed_device](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/data-sources/metal_device) | data source |
+| [equinix_metal_ip_block_ranges.address_block](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/data-sources/metal_ip_block_ranges) | data source |
+| [equinix_metal_project.project](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/data-sources/metal_project) | data source |
+| [equinix_metal_spot_market_request.join_req](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/data-sources/metal_spot_market_request) | data source |
+| [equinix_metal_spot_market_request.seed_req](https://registry.terraform.io/providers/equinix/equinix/1.36.4/docs/data-sources/metal_spot_market_request) | data source |
 
 ## Inputs
 
@@ -57,7 +57,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_billing_cycle"></a> [billing\_cycle](#input\_billing\_cycle) | Equinix Billing Cycle mode (monthly or hourly) | `string` | `"hourly"` | no |
 | <a name="input_create_ssh_key_pair"></a> [create\_ssh\_key\_pair](#input\_create\_ssh\_key\_pair) | Specify if a new SSH key pair needs to be created for the instances | `bool` | `true` | no |
-| <a name="input_harvester_version"></a> [harvester\_version](#input\_harvester\_version) | Harvester's version | `string` | `"v1.2.1"` | no |
+| <a name="input_harvester_version"></a> [harvester\_version](#input\_harvester\_version) | Harvester's version | `string` | `"v1.3.0"` | no |
 | <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | The number of nodes created on Equinix and on which the Harvester hypervisor will be installed | `string` | `"3"` | no |
 | <a name="input_ipxe_script"></a> [ipxe\_script](#input\_ipxe\_script) | URL pointing to a hosted iPXE script | `string` | `"https://raw.githubusercontent.com/rancherlabs/harvester-equinix-terraform/main/ipxe/ipxe-"` | no |
 | <a name="input_max_bid_price"></a> [max\_bid\_price](#input\_max\_bid\_price) | Maximum bid price for spot request | `string` | `"0.75"` | no |
