@@ -1,9 +1,11 @@
 variable "prefix" {
   description = "The prefix used in front of all Google resources"
+  type        = string
 }
 
 variable "project_id" {
   description = "The ID of the Google Project that will contain all created resources"
+  type        = string
 }
 
 variable "region" {
