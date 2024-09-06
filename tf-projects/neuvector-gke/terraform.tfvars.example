@@ -1,13 +1,44 @@
-prefix =
-project_id =
-region =
-# ip_cidr_range =
-# vpc =
-# subnet =
-# cluster_version =
-# instance_count =
-# instance_disk_size =
-# disk_type =
-# image_type =
-# instance_type =
-neuvector_password =
+## -- The prefix used in front of all Google resources
+prefix = ""
+
+## -- The ID of the Google Project that will contain all created resources
+project_id = ""
+
+## -- Google Region to create the resources
+region = "us-west2"
+
+## -- Range of private IPs available for the Google Subnet
+ip_cidr_range = "10.10.0.0/24"
+
+## -- Google VPC used for all resources
+vpc = null
+
+## -- Google Subnet used for all resources
+subnet = null
+
+## -- Supported Google Kubernetes Engine for Rancher Manager
+cluster_version_prefix = "1.28."
+
+## -- The number of nodes per instance group
+instance_count = 1
+
+## -- Size of the disk attached to each node, specified in GB
+instance_disk_size = 50 
+
+## -- Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced')
+disk_type = "pd-balanced"
+
+## -- The default image type used by NAP once a new node pool is being created. The value must be one of the [COS_CONTAINERD, COS, UBUNTU_CONTAINERD, UBUNTU]. NOTE: COS AND UBUNTU are deprecated as of GKE 1.24
+image_type = "cos_containerd"
+
+## -- The name of a Google Compute Engine machine type
+instance_type = "e2-highmem-2"
+
+## -- The path to write the kubeconfig for the GKE cluster
+kube_config_path = null
+
+## -- Filename to write the kubeconfig
+kube_config_filename = null
+
+## -- Password for the NeuVector admin account
+neuvector_password = ""

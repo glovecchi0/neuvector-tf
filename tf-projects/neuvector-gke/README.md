@@ -9,24 +9,22 @@
     -  `neuvector_password` to change the default admin password
 - Make sure you are logged into your Google Account from your local Terminal. See the preparatory steps [here](../../tf-modules/google-cloud/README.md).
 
-**NB: If you want to use all the configurable variables in the `terraform.tfvars` file, you will need to uncomment them there and in the `variables.tf` and `main.tf` files.**
-
 #### Terraform
 ```bash
-terraform init --upgrade ; terraform apply -target=module.google-kubernetes-engine --auto-approve ; terraform apply --auto-approve
+terraform init -upgrade && terraform apply -auto-approve
 ```
 
 - Destroy the resources when finished
 ```bash
-terraform state rm module.google-kubernetes-engine.local_file.kube-config-export ; terraform destroy -target=module.google-kubernetes-engine --auto-approve ; terraform destroy --auto-approve
+terraform destroy -auto-approve
 ```
 
 #### OpenTofu
 ```bash
-tofu init --upgrade ; tofu apply -target=module.google-kubernetes-engine --auto-approve ; tofu apply --auto-approve
+tofu init -upgrade &&  tofu apply -auto-approve
 ```
 
 - Destroy the resources when finished
 ```bash
-tofu state rm module.google-kubernetes-engine.local_file.kube-config-export ; tofu destroy -target=module.google-kubernetes-engine --auto-approve ; tofu destroy --auto-approve
+tofu destroy -auto-approve
 ```
