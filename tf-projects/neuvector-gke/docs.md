@@ -45,8 +45,8 @@
 | <a name="input_kube_config_filename"></a> [kube\_config\_filename](#input\_kube\_config\_filename) | Filename to write the kubeconfig | `string` | `null` | no |
 | <a name="input_kube_config_path"></a> [kube\_config\_path](#input\_kube\_config\_path) | The path to write the kubeconfig for the GKE cluster | `string` | `null` | no |
 | <a name="input_neuvector_password"></a> [neuvector\_password](#input\_neuvector\_password) | Password for the NeuVector admin account | `any` | n/a | yes |
-| <a name="input_prefix"></a> [prefix](#input\_prefix) | The prefix used in front of all Google resources | `any` | n/a | yes |
-| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The ID of the Google Project that will contain all created resources | `any` | n/a | yes |
+| <a name="input_prefix"></a> [prefix](#input\_prefix) | The prefix used in front of all Google resources | `string` | n/a | yes |
+| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The ID of the Google Project that will contain all created resources | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Google Region to create the resources | `string` | `"us-west2"` | no |
 | <a name="input_subnet"></a> [subnet](#input\_subnet) | Google Subnet used for all resources | `string` | `null` | no |
 | <a name="input_vpc"></a> [vpc](#input\_vpc) | Google VPC used for all resources | `string` | `null` | no |
