@@ -55,4 +55,5 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_neuvector_password"></a> [neuvector\_password](#output\_neuvector\_password) | NeuVector Initial Custom Password |
 | <a name="output_neuvector_webui_url"></a> [neuvector\_webui\_url](#output\_neuvector\_webui\_url) | NeuVector WebUI (Console) URL |
