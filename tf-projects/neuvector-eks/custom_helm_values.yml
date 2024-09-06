@@ -1,7 +1,5 @@
 controller:
   replicas: 3
-  nodeSelector:
-    node-role.kubernetes.io/nvcontroller: ""
   secret:
     enabled: true
     data:
@@ -20,8 +18,6 @@ manager:
 cve:
   scanner:
     replicas: 2
-    nodeSelector:
-      node-role.kubernetes.io/nvcontroller: ""
 
 resources:
   limits:

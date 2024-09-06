@@ -10,8 +10,7 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_subnet" "subnet" {
-  count = var.subnet == null ? 2 : 0
-
+  count             = var.subnet == null ? 2 : 0
   availability_zone = data.aws_availability_zones.available.names[count.index]
   cidr_block        = var.subnet_ip_cidr_range[count.index]
   # cidr_block        = "10.0.${count.index}.0/24"
@@ -24,6 +23,7 @@ resource "aws_subnet" "subnet" {
 }
 
 resource "aws_internet_gateway" "internet-gateway" {
+  count  = var.vpc == null ? 1 : 0
   vpc_id = aws_vpc.vpc[0].id
 
   tags = {
@@ -32,19 +32,19 @@ resource "aws_internet_gateway" "internet-gateway" {
 }
 
 resource "aws_route_table" "route-table" {
+  count  = var.vpc == null ? 1 : 0
   vpc_id = aws_vpc.vpc[0].id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.internet-gateway.id
+    gateway_id = aws_internet_gateway.internet-gateway[0].id
   }
 }
 
 resource "aws_route_table_association" "rt-association" {
-  count = var.subnet == null ? 2 : 0
-
+  count          = var.subnet == null ? 2 : 0
   subnet_id      = var.subnet == null ? "${aws_subnet.subnet.*.id[count.index]}" : var.subnet
-  route_table_id = aws_route_table.route-table.id
+  route_table_id = aws_route_table.route-table[0].id
 }
 
 # EKS Cluster Resources
@@ -78,6 +78,7 @@ resource "aws_iam_role_policy_attachment" "cluster-AmazonEKSVPCResourceControlle
 }
 
 resource "aws_security_group" "security-group" {
+  count       = var.vpc == null ? 1 : 0
   name        = "${var.prefix}-sg"
   description = "Cluster communication with worker nodes."
   vpc_id      = aws_vpc.vpc[0].id
@@ -95,11 +96,12 @@ resource "aws_security_group" "security-group" {
 }
 
 resource "aws_security_group_rule" "ingress-workstation-https" {
+  count             = var.vpc == null ? 1 : 0
   cidr_blocks       = [var.allowed_ip_cidr_range]
   description       = "Allow workstation (or a range of IPs) to communicate with the cluster API Server."
   from_port         = 443
   protocol          = "tcp"
-  security_group_id = aws_security_group.security-group.id
+  security_group_id = aws_security_group.security-group[0].id
   to_port           = 443
   type              = "ingress"
 }
@@ -109,7 +111,7 @@ resource "aws_eks_cluster" "primary" {
   role_arn = aws_iam_role.cluster-iam-role.arn
 
   vpc_config {
-    security_group_ids = ["${aws_security_group.security-group.id}"]
+    security_group_ids = ["${aws_security_group.security-group[0].id}"]
     subnet_ids         = var.subnet == null ? [aws_subnet.subnet[0].id, aws_subnet.subnet[1].id] : [var.subnet]
   }
 
@@ -117,17 +119,6 @@ resource "aws_eks_cluster" "primary" {
     aws_iam_role_policy_attachment.cluster-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.cluster-AmazonEKSVPCResourceController,
   ]
-}
-
-resource "local_file" "kube-config-export" {
-  content = templatefile("${path.module}/template-kube_config.yml", {
-    cluster_name = aws_eks_cluster.primary.name,
-    region       = var.aws_region,
-    endpoint     = aws_eks_cluster.primary.endpoint,
-    cluster_ca   = aws_eks_cluster.primary.certificate_authority.0.data
-  })
-  file_permission = "0600"
-  filename        = "${path.cwd}/${var.prefix}_kube_config.yml"
 }
 
 # EKS Worker Nodes Resources

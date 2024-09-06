@@ -4,29 +4,26 @@
 - Edit `./terraform.tfvars`
   - Update the required variables:
     -  `prefix` to give the resources an identifiable name (eg, your initials or first name)
-    -  `allowed_ip_cidr_range` to specify which IP addresses will be able to contact the cluster API Server
     -  `aws_region` to suit your region
     -  `neuvector_password` to change the default admin password
 - Make sure you are logged into your AWS Account from your local Terminal. See the preparatory steps [here](../../tf-modules/aws/README.md).
 
-**NB: If you want to use all the configurable variables in the `terraform.tfvars` file, you will need to uncomment them there and in the `variables.tf` and `main.tf` files.**
-
 #### Terraform
 ```bash
-terraform init --upgrade ; terraform apply -target=module.aws-elastic-kubernetes-service --auto-approve ; terraform apply --auto-approve
+terraform init -upgrade && terraform apply -auto-approve
 ```
 
 - Destroy the resources when finished
 ```bash
-sh ./drain-nodes.sh ; terraform destroy --auto-approve
+terraform destroy -auto-approve
 ```
 
 #### OpenTofu
 ```bash
-tofu init --upgrade ; tofu apply -target=module.aws-elastic-kubernetes-service --auto-approve ; tofu apply --auto-approve
+tofu init -upgrade && tofu apply -auto-approve
 ```
 
 - Destroy the resources when finished
 ```bash
-sh ./drain-nodes.sh ; tofu destroy --auto-approve
+tofu destroy -auto-approve
 ```
