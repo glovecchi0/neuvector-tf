@@ -58,47 +58,55 @@ variable "region" {
 }
 
 variable "ip_cidr_range" {
+  description = "Range of private IPs available for the Google Subnet"
   type        = string
   default     = "10.10.0.0/24"
-  description = "Range of private IPs available for the Google Subnet"
 }
 
 variable "vpc" {
   description = "Google VPC used for all resources"
+  type        = string
   default     = null
 }
 
 variable "subnet" {
   description = "Google Subnet used for all resources"
+  type        = string
   default     = null
 }
 
 variable "cluster_version_prefix" {
-  default     = "1.28."
   description = "Supported Google Kubernetes Engine for Rancher Manager"
+  type        = string
+  default     = "1.28."
 }
 
 variable "instance_count" {
-  default     = 1
   description = "The number of nodes per instance group"
+  type        = number
+  default     = 1
 }
 
 variable "instance_disk_size" {
-  default     = 50
   description = "Size of the disk attached to each node, specified in GB"
+  type        = number
+  default     = 50
 }
 
 variable "disk_type" {
-  default     = "pd-balanced"
   description = "Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced')"
+  type        = string
+  default     = "pd-balanced"
 }
 
 variable "image_type" {
-  default     = "cos_containerd"
   description = "The default image type used by NAP once a new node pool is being created. The value must be one of the [COS_CONTAINERD, COS, UBUNTU_CONTAINERD, UBUNTU]. NOTE: COS AND UBUNTU are deprecated as of GKE 1.24"
+  type        = string
+  default     = "cos_containerd"
 }
 
 variable "instance_type" {
-  default     = "e2-highmem-2"
   description = "The name of a Google Compute Engine machine type"
+  type        = string
+  default     = "e2-highmem-2"
 }
