@@ -2,12 +2,12 @@ terraform {
   required_providers {
     equinix = {
       source  = "equinix/equinix"
-      version = "1.36.4"
+      version = "2.4.1"
     }
 
     rancher2 = {
       source  = "rancher/rancher2"
-      version = "4.1.0"
+      version = "5.0.0"
     }
 
     ssh = {
@@ -31,7 +31,7 @@ terraform {
     }
   }
 
-  required_version = ">= 0.14"
+  required_version = ">= 1.0"
 }
 
 provider "equinix" {}
@@ -44,17 +44,3 @@ provider "rancher2" {
 }
 
 provider "ssh" {}
-
-provider "harvester" {
-  kubeconfig = "${path.cwd}/${var.prefix}_kube_config.yml"
-}
-
-provider "kubernetes" {
-  config_path = "${path.cwd}/${var.prefix}_kube_config.yml"
-}
-
-provider "helm" {
-  kubernetes {
-    config_path = "${path.cwd}/${var.prefix}_kube_config.yml"
-  }
-}
