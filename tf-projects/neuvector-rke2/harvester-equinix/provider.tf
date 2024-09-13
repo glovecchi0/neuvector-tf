@@ -34,7 +34,9 @@ terraform {
   required_version = ">= 1.0"
 }
 
-provider "equinix" {}
+provider "equinix" {
+  auth_token = var.api_key
+}
 
 provider "rancher2" {
   api_url    = var.rancher_api_url

@@ -74,7 +74,7 @@
 | <a name="input_rancher_api_url"></a> [rancher\_api\_url](#input\_rancher\_api\_url) | Rancher API endpoint to manager your Harvester cluster | `string` | `""` | no |
 | <a name="input_rancher_insecure"></a> [rancher\_insecure](#input\_rancher\_insecure) | Allow insecure connections to the Rancher API | `bool` | `false` | no |
 | <a name="input_rancher_secret_key"></a> [rancher\_secret\_key](#input\_rancher\_secret\_key) | Rancher secret key | `string` | `""` | no |
-| <a name="input_rke2_config"></a> [rke2\_config](#input\_rke2\_config) | Additional customization to the RKE2 config.yaml file | `any` | `null` | no |
+| <a name="input_rke2_config"></a> [rke2\_config](#input\_rke2\_config) | Additional customization to the RKE2 config.yaml file | `string` | `null` | no |
 | <a name="input_rke2_version"></a> [rke2\_version](#input\_rke2\_version) | RKE2 version | `string` | `null` | no |
 | <a name="input_spot_instance"></a> [spot\_instance](#input\_spot\_instance) | Set to true to use spot instance instead of on demand. Also set your max bid price if true. | `bool` | `true` | no |
 | <a name="input_ssh_key"></a> [ssh\_key](#input\_ssh\_key) | Your ssh key, examples: 'github: myghid' or 'ssh-rsa AAAAblahblah== keyname' | `string` | `""` | no |

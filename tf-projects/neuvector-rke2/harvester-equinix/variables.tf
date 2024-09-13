@@ -186,6 +186,7 @@ variable "description" {
 
 variable "ssh_username" {
   description = "Username used for SSH login"
+  type        = string
   default     = "ubuntu"
 }
 
@@ -226,24 +227,25 @@ variable "startup_script" {
 }
 
 variable "kube_config_path" {
-  type        = string
   description = "Harvester's RKE2 cluster kubeconfig file path"
+  type        = string
   default     = null
 }
 
 variable "kube_config_filename" {
-  type        = string
   description = "Harvester's RKE2 cluster kubeconfig file name"
+  type        = string
   default     = null
 }
 
 variable "rke2_version" {
-  type        = string
   description = "RKE2 version"
+  type        = string
   default     = null
 }
 
 variable "rke2_config" {
   description = "Additional customization to the RKE2 config.yaml file"
+  type        = string
   default     = null
 }

@@ -30,6 +30,7 @@ module "harvester_equinix" {
   rancher_access_key   = var.rancher_access_key
   rancher_secret_key   = var.rancher_secret_key
   rancher_insecure     = var.rancher_insecure
+  api_key              = var.api_key
 }
 
 resource "null_resource" "wait_harvester_services_startup" {
