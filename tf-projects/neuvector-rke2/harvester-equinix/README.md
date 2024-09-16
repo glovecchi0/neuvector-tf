@@ -17,7 +17,7 @@
 
 #### Terraform Apply
 ```bash
-terraform init -upgrade && terraform apply -auto-approve && sed -i '' 's|/\*|#/\*|g; s|\*/|#\*/|g' main.tf outputs.tf && terraform apply -auto-approve
+terraform init -upgrade && terraform apply -auto-approve && sed -i '' 's|/\*|#/\*|g; s|\*/|#\*/|g' main.tf outputs.tf && terraform init -upgrade && terraform apply -auto-approve
 ```
 
 #### Terraform Destroy
@@ -27,7 +27,7 @@ terraform destroy -auto-approve && sed -i '' 's|#/\*|/\*|g; s|#\*/|\*/|g' main.t
 
 #### OpenTofu Apply
 ```bash
-tofu init -upgrade && tofu apply -auto-approve && sed -i '' 's|/\*|#/\*|g; s|\*/|#\*/|g' main.tf outputs.tf && tofu apply -auto-approve
+tofu init -upgrade && tofu apply -auto-approve && sed -i '' 's|/\*|#/\*|g; s|\*/|#\*/|g' main.tf outputs.tf && tofu init -upgrade && tofu apply -auto-approve
 ```
 
 #### OpenTofu Destroy
