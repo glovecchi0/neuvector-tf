@@ -17,16 +17,13 @@
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.32.0 |
 | <a name="provider_local"></a> [local](#provider\_local) | 2.5.2 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.2.3 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
 | <a name="provider_ssh"></a> [ssh](#provider\_ssh) | 2.7.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_harvester_additional_virtual_machines"></a> [harvester\_additional\_virtual\_machines](#module\_harvester\_additional\_virtual\_machines) | ../../../tf-modules/harvester/virtual-machines | n/a |
 | <a name="module_harvester_equinix"></a> [harvester\_equinix](#module\_harvester\_equinix) | ../../../tf-modules/harvester/infrastructure/equinix | n/a |
-| <a name="module_harvester_first_virtual_machine"></a> [harvester\_first\_virtual\_machine](#module\_harvester\_first\_virtual\_machine) | ../../../tf-modules/harvester/virtual-machines | n/a |
 
 ## Resources
 
@@ -34,13 +31,8 @@
 |------|------|
 | [kubernetes_namespace.harvester_vms_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [local_file.kube_config_yaml](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
-| [local_file.rke2_additional_servers_config_yaml](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
-| [local_file.rke2_first_server_config_yaml](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 | [null_resource.wait_harvester_services_startup](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [random_password.token](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [ssh_resource.retrieve_kubeconfig](https://registry.terraform.io/providers/loafoe/ssh/2.7.0/docs/resources/resource) | resource |
-| [local_file.rke2_additional_servers_config_yaml-content](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
-| [local_file.rke2_first_server_config_yaml-content](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
 | [local_file.ssh_private_key](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
 
 ## Inputs
@@ -96,6 +88,4 @@
 |------|-------------|
 | <a name="output_equinix_additional_servers_public_ip"></a> [equinix\_additional\_servers\_public\_ip](#output\_equinix\_additional\_servers\_public\_ip) | n/a |
 | <a name="output_equinix_first_server_public_ip"></a> [equinix\_first\_server\_public\_ip](#output\_equinix\_first\_server\_public\_ip) | n/a |
-| <a name="output_harvester_first_virtual_machine_ip"></a> [harvester\_first\_virtual\_machine\_ip](#output\_harvester\_first\_virtual\_machine\_ip) | n/a |
-| <a name="output_harvester_first_virtual_machine_name"></a> [harvester\_first\_virtual\_machine\_name](#output\_harvester\_first\_virtual\_machine\_name) | n/a |
 | <a name="output_harvester_url"></a> [harvester\_url](#output\_harvester\_url) | n/a |

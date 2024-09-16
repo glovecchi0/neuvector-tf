@@ -5,7 +5,7 @@
   - Update the required variables:
     -  `prefix` to give the resources an identifiable name (eg, your initials or first name)
     -  `project_name` to identify the project in your Equinix account <- **otherwise you can export the `TF_VAR_project_name` or `TF_VAR_project_id` variable**
-    -  `metro` to suit your Region
+    -  `metro` to suit your Region <- **remember to set the `use_cheapest_metro` variable to `false` if you want to choose a specific data center**
     -  `api_key` to access your Equinix account <- **otherwise you can export the `METAL_AUTH_TOKEN` or `TF_VAR_api_key` variable**
     -  `vm_namespace` to specify the namespace where the VMs will be placed
     -  `ssh_password` to specify the password used for SSH login to Harvester's Virtual Machines
@@ -17,22 +17,22 @@
 
 #### Terraform Apply
 ```bash
-terraform init -upgrade && terraform apply -auto-approve
+terraform init -upgrade && terraform apply -auto-approve && sed -i '' 's|/\*|#/\*|g; s|\*/|#\*/|g' main.tf outputs.tf && terraform apply -auto-approve
 ```
 
 #### Terraform Destroy
 ```bash
-terraform destroy -auto-approve
+terraform destroy -auto-approve && sed -i '' 's|#/\*|/\*|g; s|#\*/|\*/|g' main.tf outputs.tf
 ```
 
 #### OpenTofu Apply
 ```bash
-tofu init -upgrade && tofu apply -auto-approve
+tofu init -upgrade && tofu apply -auto-approve && sed -i '' 's|/\*|#/\*|g; s|\*/|#\*/|g' main.tf outputs.tf && tofu apply -auto-approve
 ```
 
 #### OpenTofu Destroy
 ```bash
-tofu destroy -auto-approve
+tofu destroy -auto-approve && sed -i '' 's|#/\*|/\*|g; s|#\*/|\*/|g' main.tf outputs.tf
 ```
 
 ## How to access Equinix instances

@@ -1,4 +1,4 @@
-# INFRASTRUCTURE - Harvester hypervisor on Equinix infrastructure
+// INFRASTRUCTURE - Harvester hypervisor on Equinix infrastructure
 
 locals {
   private_ssh_key_path = var.ssh_private_key_path == null ? "${path.cwd}/${var.prefix}-ssh_private_key.pem" : var.ssh_private_key_path
@@ -96,10 +96,11 @@ resource "kubernetes_namespace" "harvester_vms_namespace" {
   }
 }
 
-# INFRASTRUCTURE DONE
+// INFRASTRUCTURE DONE
 
-# HARVESTER VIRTUAL MACHINES - RKE2 CLUSTER & NEUVECTOR
+// HARVESTER VIRTUAL MACHINES - RKE2 CLUSTER & NEUVECTOR
 
+/*
 resource "random_password" "token" {
   length  = 40
   special = false
@@ -187,5 +188,6 @@ module "harvester_additional_virtual_machines" {
   vm_data_disk_size = var.vm_data_disk_size
   startup_script    = data.local_file.rke2_additional_servers_config_yaml-content.content_base64
 }
+*/
 
-# RKE2 CLUSTER & NEUVECTOR DONE
+// RKE2 CLUSTER & NEUVECTOR DONE

@@ -10,6 +10,7 @@ output "equinix_additional_servers_public_ip" {
   value = module.harvester_equinix.join_ips
 }
 
+/*
 output "harvester_first_virtual_machine_name" {
   value = module.harvester_first_virtual_machine.harvester_first_virtual_machine_name
 }
@@ -17,3 +18,4 @@ output "harvester_first_virtual_machine_name" {
 output "harvester_first_virtual_machine_ip" {
   value = module.harvester_first_virtual_machine.harvester_first_virtual_machine_ip
 }
+*/
