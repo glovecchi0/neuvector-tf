@@ -97,7 +97,7 @@ variable "max_bid_price" {
 variable "use_cheapest_metro" {
   description = "A boolean variable to control cheapest metro selection"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "ssh_key" {
