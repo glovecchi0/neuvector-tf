@@ -15,24 +15,44 @@
 
 `TF_VAR_metal_create_project` Terraform variable to create a project of name `TF_VAR_project_name` if it does not exist.
 
-#### Terraform Apply
+#### Terraform Apply (Infrastructure only)
+```bash
+terraform init -upgrade && terraform apply -auto-approve
+```
+
+#### Terraform Apply (Infrastructure + Virtual Machines)
 ```bash
 terraform init -upgrade && terraform apply -auto-approve && sed -i '' 's|/\*|#/\*|g; s|\*/|#\*/|g' main.tf outputs.tf && terraform init -upgrade && terraform apply -auto-approve
 ```
 
-#### Terraform Destroy
+#### Terraform Destroy (Infrastructure only)
 ```bash
-terraform destroy -auto-approve && sed -i '' 's|#/\*|/\*|g; s|#\*/|\*/|g' main.tf outputs.tf
+terraform destroy -auto-approve
 ```
 
-#### OpenTofu Apply
+#### Terraform Destroy (Infrastructure + Virtual Machines)
+```bash
+terraform destroy -auto-approve && sed -i '' 's/#//g' main.tf outputs.tf
+```
+
+#### OpenTofu Apply (Infrastructure only)
+```bash
+tofu init -upgrade && tofu apply -auto-approve
+```
+
+#### OpenTofu Apply (Infrastructure + Virtual Machines)
 ```bash
 tofu init -upgrade && tofu apply -auto-approve && sed -i '' 's|/\*|#/\*|g; s|\*/|#\*/|g' main.tf outputs.tf && tofu init -upgrade && tofu apply -auto-approve
 ```
 
-#### OpenTofu Destroy
+#### OpenTofu Destroy (Infrastructure only)
 ```bash
-tofu destroy -auto-approve && sed -i '' 's|#/\*|/\*|g; s|#\*/|\*/|g' main.tf outputs.tf
+tofu destroy -auto-approve
+```
+
+#### OpenTofu Destroy (Infrastructure + Virtual Machines)
+```bash
+tofu destroy -auto-approve && sed -i '' 's/#//g' main.tf outputs.tf
 ```
 
 ## How to access Equinix instances
