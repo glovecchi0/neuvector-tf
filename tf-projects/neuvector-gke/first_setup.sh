@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Log into the GKE cluster with the credentials used to create it
-export KUBECONFIG="./$(cat ./terraform.tfvars | grep -v "#" | grep -i prefix | awk -F= '{print $2}' | tr -d '"' | sed 's/ //g')_kube_config.yml"
-gcloud container clusters get-credentials $(cat ./terraform.tfvars | grep -v "#" | grep -i prefix | awk -F= '{print $2}' | tr -d '"')-cluster --region $(cat ./terraform.tfvars | grep -v "#" | grep -i region | awk -F= '{print $2}' | tr -d '"')
+export KUBECONFIG="./$(cat ./terraform.tfvars | grep -v "#" | grep -i "^prefix" | awk -F= '{print $2}' | tr -d '"' | sed 's/ //g')_kube_config.yml"
+gcloud container clusters get-credentials $(cat ./terraform.tfvars | grep -v "#" | grep -i "^prefix" | awk -F= '{print $2}' | tr -d '"')-cluster --region $(cat ./terraform.tfvars | grep -v "#" | grep -i region | awk -F= '{print $2}' | tr -d '"')
 sleep 10
 
 # Assign the cluster-admin role to the "client" user created thanks to the master_auth parameter (../../tf-modules/google-cloud/gke/main.tf)
@@ -23,7 +23,7 @@ EOF
 # https://stackoverflow.com/questions/58976517/gke-masterauth-clientcertificate-has-no-permissions-to-access-cluster-resource
 sleep 5
 
-export KUBECONFIG="./$(cat ./terraform.tfvars | grep -v "#" | grep -i prefix | awk -F= '{print $2}' | tr -d '"' | sed 's/ //g')_kube_config.yml" 
+export KUBECONFIG="./$(cat ./terraform.tfvars | grep -v "#" | grep -i "^prefix" | awk -F= '{print $2}' | tr -d '"' | sed 's/ //g')_kube_config.yml" 
 
 kubectl config view
 
