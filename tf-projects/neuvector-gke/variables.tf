@@ -80,7 +80,7 @@ variable "subnet" {
 variable "cluster_version_prefix" {
   description = "Supported Google Kubernetes Engine for Rancher Manager"
   type        = string
-  default     = "1.28."
+  default     = "1.31."
 }
 
 variable "instance_count" {

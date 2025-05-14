@@ -12,6 +12,12 @@ terraform.tfvars
 *-ssh_private_key.pem*
 *-ssh_public_key.pem*
 *config-yaml*
+*ca.key*
+*ca.crt*
+*tls.key*
+*cert.csr*
+*ca.srl*
+*tls.crt*
 
 # Temporary files
 **/*.swp

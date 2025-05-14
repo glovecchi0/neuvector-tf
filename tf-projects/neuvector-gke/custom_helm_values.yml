@@ -1,3 +1,5 @@
+tag: 5.4.3
+
 controller:
   replicas: 3
   env: 
@@ -5,6 +7,11 @@ controller:
     value: "platform=Kubernetes:GKE"
   nodeSelector:
     node-role.kubernetes.io/nvcontroller: ""
+#  certificate:
+#    secret: "neuvector-internal-certs"
+  internal:
+    certificate:
+      secret: "neuvector-internal-certs"
   secret:
     enabled: true
     data:
@@ -25,6 +32,14 @@ cve:
     replicas: 2
     nodeSelector:
       node-role.kubernetes.io/nvcontroller: ""
+  internal:
+    certificate:
+      secret: "neuvector-internal-certs"
+
+enforcer:
+  internal:
+    certificate:
+      secret: "neuvector-internal-certs"
 
 resources:
   limits:
